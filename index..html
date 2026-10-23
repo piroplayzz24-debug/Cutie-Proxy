@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cutie Proxy | Bedrock Utility & Performance Dashboard</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background: radial-gradient(circle at 50% 10%, #1a0826 0%, #08090d 60%); color: #e2e8f0; min-height: 100vh; overflow-x: hidden; }
+    
+    /* Decoy Gate */
+    #decoyGate {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      min-height: 100vh; text-align: center; padding: 20px;
+    }
+    .decoy-title { font-size: 28px; font-weight: 800; color: #64748b; letter-spacing: 2px; margin-bottom: 8px; }
+    .decoy-desc { color: #475569; font-size: 14px; max-width: 400px; margin-bottom: 24px; }
+    .decoy-box { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 12px; width: 100%; max-width: 320px; }
+    .decoy-input { width: 100%; background: #000; border: 1px solid #334155; color: #fff; padding: 10px; border-radius: 6px; font-family: monospace; text-align: center; margin-bottom: 12px; }
+    .decoy-btn { width: 100%; background: #334155; color: #cbd5e1; border: none; padding: 10px; border-radius: 6px; font-weight: 700; cursor: pointer; }
+
+    /* App Container */
+    #appContent { display: none; }
+
+    /* Navigation Bar */
+    header {
+      padding: 16px 24px; display: flex; justify-content: space-between; align-items: center;
+      background: rgba(10, 10, 16, 0.95); border-bottom: 1px solid rgba(255, 68, 170, 0.25);
+      position: sticky; top: 0; z-index: 1000;
+    }
+    .nav-left { display: flex; align-items: center; gap: 14px; }
+    .hamburger-btn {
+      background: rgba(255, 68, 170, 0.1); border: 1px solid rgba(255, 68, 170, 0.35);
+      color: #ff44aa; font-size: 20px; width: 42px; height: 42px; border-radius: 8px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+    .logo {
+      font-size: 20px; font-weight: 800; color: #ff44aa; text-shadow: 0 0 14px rgba(255, 68, 170, 0.6);
+      display: flex; align-items: center; gap: 10px; text-decoration: none;
+    }
+    .logo-badge {
+      color: #55ff55; font-size: 11px; padding: 3px 8px; border: 1px solid #55ff55;
+      border-radius: 6px; background: rgba(85, 255, 85, 0.1); letter-spacing: 1px;
+    }
+    .lock-admin-btn {
+      background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #94a3b8; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 13px;
+    }
+
+    /* Drawer */
+    .drawer-overlay {
+      position: fixed; inset: 0; background: rgba(0, 0, 0, 0.75); z-index: 1200;
+      opacity: 0; pointer-events: none; transition: opacity 0.2s ease;
+    }
+    .drawer-overlay.active { opacity: 1; pointer-events: auto; }
+    .drawer-menu {
+      position: fixed; top: 0; left: -320px; width: 280px; height: 100vh;
+      background: #0d0e17; border-right: 1px solid rgba(255, 68, 170, 0.3);
+      z-index
